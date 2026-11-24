@@ -1,0 +1,296 @@
+<!doctype html><html lang="vi"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Đèn Bàn Thông Minh</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@300;500&family=Noto+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{--p:.58;--sr:"Noto Serif","Hiragino Mincho ProN","Yu Mincho","Songti SC",serif;--mo:ui-monospace,Menlo,Consolas,monospace}
+*{box-sizing:border-box;margin:0}
+body[data-th=a]{--bg:#ece3c8;--pn:#f6efd9;--ink:#17325a;--mu:#4f5f78;--ln:#c0b799;--ac:#17325a;--gl:143 176 196;--g:#2f6b4a;--a:#8a5a10;--d:#a8342a;--w1:#152e52;--w2:#2d5a88;--w3:#8baec4;--foam:#faf5e6;--gr:rgb(110 90 50/.06);--rd2:#b02d22}
+body[data-th=n]{--bg:#0f2444;--pn:#14305a;--ink:#efe7cf;--mu:#a9b6cc;--ln:#2a4468;--ac:#efe7cf;--gl:143 176 196;--g:#8fd0a8;--a:#e0b865;--d:#f09a8c;--w1:#1d3b66;--w2:#3e72ad;--w3:#23477a;--foam:#f5eed8;--gr:rgb(255 255 255/.025);--rd2:#ff8f7e}
+body[data-th=m]{--bg:#d9e3e6;--pn:#eaf0f0;--ink:#16304f;--mu:#4a5d75;--ln:#aebdc6;--ac:#1c3a5e;--gl:255 214 160;--g:#2f6b4a;--a:#8a5a10;--d:#a8342a;--w1:#16304f;--w2:#3d6f9e;--w3:#9cb9cc;--foam:#ffffff;--gr:rgb(20 50 80/.04);--rd2:#b02d22}
+body{background:var(--bg);color:var(--ink);font:15px/1.7 "Noto Sans",system-ui,sans-serif;padding:28px 22px 56px;transition:background .5s,color .5s}
+.w{max-width:560px;margin:auto}
+@media(min-width:860px){.w{max-width:1000px;display:grid;grid-template-columns:1fr 1fr;column-gap:72px;align-items:start}.top{grid-column:1/-1}}
+h1,h2,.hero b,.seg small,.nb{font-family:var(--sr)}
+.top{display:flex;align-items:center;gap:16px;flex-wrap:wrap;padding-bottom:22px}
+.lg{width:68px;height:auto;flex:none}
+h1{font-size:22px;font-weight:500;letter-spacing:.06em;line-height:1.3}.top p{color:var(--mu);font-size:13px}
+.th{margin-left:auto;display:flex;gap:8px}
+.th button{width:64px;height:64px;padding:0 5px;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;line-height:1.05;border-radius:50%;border:1px solid var(--ln);background:none;color:var(--ink);font:17px var(--sr);cursor:pointer}
+.th button small{font-size:9.5px;letter-spacing:-.01em;max-width:100%;white-space:nowrap;opacity:.9}
+.th .on{border-color:#b8372c;box-shadow:0 0 0 1px #b8372c}
+.st0{width:100%;color:var(--mu);font-size:13px;display:flex;gap:8px;align-items:center}.st0:before{content:"";width:6px;height:6px;border-radius:50%;background:#b8372c}
+.c{padding:30px 0;border-top:1px solid var(--ln);display:grid;gap:14px}
+h2{font-size:17px;font-weight:500;letter-spacing:.04em}.nb{color:#b8372c;margin-right:12px;font-size:19px}
+.sub,.cap{color:var(--mu);font-size:13px}.cap{font-family:var(--mo);font-size:12px}
+.hero{border-top:0;text-align:center;justify-items:center;position:relative;padding:34px 0}
+.hero:before{content:"";position:absolute;width:440px;max-width:130%;aspect-ratio:1;top:-40px;border-radius:50%;background:radial-gradient(circle,rgb(var(--gl)/calc(.05 + var(--p)*.3)),transparent 65%)}
+.hero>*{position:relative}
+.en{width:280px;height:190px;position:relative;border:1.5px solid var(--ink);border-radius:16px;overflow:hidden;background:var(--pn);box-shadow:inset 0 0 0 3px var(--pn),inset 0 0 0 4px var(--ln)}
+.wavefill{position:absolute;inset:0;width:100%;height:100%;display:block}
+.wave-scaler{transform-origin:140px 190px;transform:translateY(calc((1 - var(--p)) * 144px)) scaleY(calc(0.24 + var(--p) * 0.80));transition:transform .48s cubic-bezier(.22,1,.36,1)}
+.en b{position:absolute;top:14px;right:18px;inset:auto;font-size:40px;font-weight:300;line-height:1;z-index:2;text-shadow:0 1px 10px var(--pn),0 0 4px var(--pn)}
+#pwm{font:13px var(--mo);color:var(--mu)}
+.oled{background:#0b0b0c;color:#efe8d8;border-radius:8px;padding:16px 18px;font:500 14px var(--mo);box-shadow:0 0 0 1px var(--ln);transition:transform .5s}
+.oled .hd{text-align:center;opacity:.75}#oc{text-align:center;font-size:36px;letter-spacing:.08em;margin:2px 0 8px}
+.oled hr{border:0;border-top:1px solid #efe8d866;margin-bottom:8px}.ft{display:flex;justify-content:space-between;align-items:flex-end}
+.seg{display:flex;justify-content:center;gap:34px;margin:6px 0}
+.seg button{background:none;border:0;color:var(--mu);cursor:pointer;text-align:center;font:inherit;line-height:1.3}
+.seg b{display:block;font-weight:500;letter-spacing:.1em}.seg small{font-size:15px}
+.seg button:after{content:"";display:block;width:6px;height:6px;border-radius:50%;margin:8px auto 0}.seg .on{color:var(--ink)}.seg .on:after{background:#b8372c}
+.rg{display:grid;gap:12px}.rg span{display:flex;justify-content:space-between}.rg b{font:500 14px var(--mo)}
+input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:2px;background:var(--ln);outline:0}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:20px;height:20px;border-radius:50%;background:var(--bg);border:1.5px solid var(--ink)}
+input[type=range]::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--bg);border:1.5px solid var(--ink)}
+.t{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:6px 0}.t small{display:block;color:var(--mu);font-size:13px;line-height:1.5}
+.t input{-webkit-appearance:none;appearance:none;flex:none;width:44px;height:24px;border-radius:12px;border:1px solid var(--mu);position:relative;cursor:pointer;transition:.3s}
+.t input:after{content:"";position:absolute;top:3px;left:3px;width:16px;height:16px;border-radius:50%;background:var(--mu);transition:.3s}
+.t input:checked{border-color:var(--ac)}.t input:checked:after{background:var(--ac);transform:translateX(20px)}
+select,.f input{width:100%;padding:10px 0;border:0;border-bottom:1px solid var(--mu);border-radius:0;background:none;color:inherit;font:inherit}
+.f{display:grid;gap:12px}
+.st{display:grid;grid-template-columns:auto 1fr;gap:6px 16px;font-size:14px}.st span{color:var(--mu)}.st b{text-align:right;font-weight:500}.st code{grid-column:1/-1;font:13px var(--mo);color:var(--ac)}
+.btn{display:flex;gap:8px;justify-content:center;align-items:center;width:100%;padding:12px;border-radius:99px;border:1px solid var(--ink);background:none;color:var(--ink);font:inherit;letter-spacing:.04em;cursor:pointer}
+.pri{background:var(--ink);color:var(--bg)}.spin svg{animation:s 1s linear infinite}@keyframes s{to{transform:rotate(360deg)}}
+ul{list-style:none;padding:0}li{display:flex;align-items:center;gap:12px;padding:13px 4px;border-top:1px solid var(--ln);cursor:pointer}li:first-child{border:0}
+li em{font-style:normal;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}li.sel em{border-bottom:1px solid #b8372c}
+li s{text-decoration:none;font:13px var(--mo)}.g{color:var(--g)}.a{color:var(--a)}.d{color:var(--d)}
+.b{display:inline-flex;gap:3px}.b i{width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.2}.b .on{opacity:1}
+u{font-size:12px;color:var(--mu);text-decoration:none;border:1px solid var(--ln);border-radius:99px;padding:0 8px}
+
+body{background-image:repeating-linear-gradient(0deg,#0000 0 3px,var(--gr) 3px 4px)}
+.ct{border:2px solid var(--ink);padding:5px;background:var(--pn)}.ci{border:1px solid var(--ink);padding:10px 16px;display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.ct .lg{width:50px}.ci h1{font-size:19px}
+.collab{display:flex;align-items:center;gap:10px}
+.cx{font:500 17px var(--sr);color:var(--rd2);line-height:1}
+.hcmut{display:flex;align-items:center;gap:10px;padding-right:14px;border-right:1px solid var(--ink)}
+.hcmut-mark{width:48px;height:50px;flex:none;display:block}
+.hcmut-txt{display:flex;flex-direction:column;line-height:1.25;font-family:"Noto Sans",Arial,sans-serif}
+.hcmut-txt small{font-size:8.5px;font-weight:500;letter-spacing:.03em;color:#030391;text-transform:uppercase}
+.hcmut-txt b{font-size:12.5px;font-weight:700;letter-spacing:.02em;color:#030391;text-transform:uppercase}
+body[data-th=n] .hcmut-txt small,body[data-th=n] .hcmut-txt b{color:#ffffff}
+.wv{display:block;width:100%;height:auto}.wv+.c{border-top:0}.w1{fill:var(--w1)}.w2{fill:var(--w2)}.w3{fill:var(--w3)}.fm,.fm circle{fill:var(--foam)}
+.cl{fill:none;stroke:var(--foam);stroke-width:3;stroke-linecap:round}.ln{fill:none;stroke:var(--w2);stroke-width:2;opacity:.85}
+.sg{grid-column:1/-1;height:44px;margin-top:28px;background:radial-gradient(circle at 50% 100%,var(--w1) 0 22%,var(--foam) 22% 27%,var(--w2) 27% 45%,var(--foam) 45% 50%,var(--w1) 50% 68%,#0000 68%) 0 0/44px 22px,radial-gradient(circle at 50% 100%,var(--w1) 0 22%,var(--foam) 22% 27%,var(--w2) 27% 45%,var(--foam) 45% 50%,var(--w1) 50% 68%,#0000 68%) 22px 11px/44px 22px}
+</style></head>
+<body data-th="a">
+<main class="w">
+<header class="top"><div class="ct"><div class="ci">
+<div class="collab">
+  <svg class="lg" viewBox="0 0 80.4 76.4" role="img" aria-label="THE BIG 6"><path fill="#151513" d="M1.1 73.1L2.5 74.8L5.0 76.1L75.4 76.1L77.3 75.3L78.8 74.0L80.1 71.4L80.1 5.0L79.0 2.8L77.8 1.5L75.3 0.3L5.3 0.3L3.3 1.1L1.8 2.4L0.3 5.4L0.3 71.1Z"/><path fill="#f4f1e8" fill-rule="evenodd" d="M1.1 73.1L2.5 74.8L5.0 76.1L75.4 76.1L77.3 75.3L78.8 74.0L80.1 71.4L80.1 5.0L79.0 2.8L77.8 1.5L75.3 0.3L5.3 0.3L3.3 1.1L1.8 2.4L0.3 5.4L0.3 71.1ZM4.4 72.9L5.6 73.5L74.8 73.5L75.8 73.1L76.6 72.4L77.4 71.0L77.4 5.4L76.3 3.6L74.6 2.9L5.8 2.9L3.8 4.1L3.1 5.3L3.0 70.4L3.4 71.8ZM9.7 66.9L11.4 68.2L13.5 69.2L16.7 70.0L21.4 70.5L58.8 70.5L62.0 70.3L66.0 69.5L69.8 67.9L71.8 66.0L72.9 63.2L72.9 59.0L71.9 56.7L70.3 55.0L68.5 54.1L65.7 53.1L63.2 52.6L59.4 52.2L33.6 52.2L27.6 52.9L24.1 54.4L23.9 54.3L23.9 51.8L24.1 51.1L25.0 50.2L27.2 49.4L72.2 49.4L72.3 44.3L71.5 44.1L64.3 43.7L23.2 43.6L19.1 43.8L14.5 44.7L11.5 46.1L9.2 48.1L7.9 51.1L7.6 52.7L7.6 61.8L8.3 64.7ZM7.9 41.2L28.6 41.1L32.1 39.9L33.7 38.5L34.3 37.0L34.3 35.6L34.0 34.3L32.5 32.7L30.3 31.8L31.7 31.1L32.7 30.1L33.2 28.8L33.1 27.1L31.7 25.5L29.7 24.6L27.5 24.2L7.8 24.3ZM50.7 40.3L52.9 41.1L55.9 41.6L60.7 41.6L63.9 40.9L67.5 39.1L68.3 41.2L72.8 41.1L72.6 31.6L59.0 31.7L59.2 34.8L65.3 35.0L64.5 36.0L63.4 36.6L60.5 37.2L58.3 37.2L55.3 36.5L53.9 35.5L52.9 33.7L52.8 32.1L53.4 30.3L54.9 29.0L57.4 28.1L59.9 28.0L62.3 28.3L64.0 29.1L65.0 30.2L72.5 30.2L72.6 29.6L71.7 27.5L70.2 26.1L68.5 25.2L66.0 24.3L61.8 23.7L56.9 23.7L54.1 24.1L51.2 24.8L49.1 25.8L46.7 27.8L45.7 29.5L45.1 31.8L45.1 33.5L45.6 35.6L46.7 37.5L47.9 38.7ZM30.1 22.1L36.0 22.1L36.1 16.4L36.3 16.1L45.8 16.1L46.1 16.4L46.2 22.1L52.2 22.0L52.2 6.5L46.2 6.5L46.1 11.9L45.8 12.1L36.3 12.1L36.1 11.9L36.0 6.5L30.0 6.6ZM60.5 18.1L60.8 18.4L72.9 18.4L72.9 22.0L54.6 22.1L54.4 6.6L72.5 6.5L72.6 10.4L60.8 10.4L60.5 10.6L60.5 12.2L60.8 12.5L72.0 12.5L72.3 12.9L72.3 15.2L72.0 16.1L60.8 16.1L60.5 16.4ZM24.1 60.5L25.1 59.0L26.1 58.5L28.1 58.2L52.8 58.2L54.4 58.4L55.8 59.0L56.7 60.2L56.8 61.5L56.4 62.5L55.7 63.3L53.1 64.0L27.7 64.0L26.2 63.8L24.8 63.0L24.1 61.8ZM7.8 10.7L14.7 10.7L15.0 11.0L15.1 22.1L21.1 22.0L21.1 11.1L21.4 10.7L28.2 10.6L28.1 6.5L7.6 6.6ZM36.2 24.2L43.2 24.3L43.1 41.2L36.1 41.1ZM15.1 37.0L15.4 37.2L24.8 37.2L26.1 36.8L26.7 35.8L26.6 35.1L25.2 34.2L15.4 34.2L15.1 34.5ZM15.1 30.3L15.4 30.6L24.7 30.6L25.3 30.3L26.0 29.5L25.8 28.7L24.7 28.0L15.4 28.0L15.1 28.5Z"/></svg>
+  <span class="cx" aria-hidden="true">×</span>
+  <!-- Official HCMUT Logo & Full University Lockup -->
+  <div class="hcmut" aria-label="Đại học Quốc gia Thành phố Hồ Chí Minh - Trường Đại học Bách khoa">
+    <svg class="hcmut-mark" viewBox="0 0 200 208" role="img" aria-label="Logo Đại học Bách khoa TP.HCM">
+      <!-- Outer White Protective Outline -->
+      <polygon points="100,4 150,33 150,79 196,106 196,164 150,192 100,164 50,192 4,164 4,106 50,79 50,33" fill="#ffffff"/>
+      <!-- Top Cube: Left Face (#030391) & Right Face (#1488D8) -->
+      <polygon points="100,10 100,66 55,92 55,36" fill="#030391"/>
+      <polygon points="100,10 145,36 145,92 100,66" fill="#1488D8"/>
+      <!-- Bottom-Left Cube: Left Face (#1488D8) & Bottom Face (#030391) -->
+      <polygon points="55,92 55,148 10,174 10,118" fill="#1488D8"/>
+      <polygon points="55,148 100,174 55,200 10,174" fill="#030391"/>
+      <!-- Bottom-Right Cube: Right Face (#030391) & Bottom Face (#1488D8) -->
+      <polygon points="145,92 190,118 190,174 145,148" fill="#030391"/>
+      <polygon points="145,148 190,174 145,200 100,174" fill="#1488D8"/>
+      <!-- Center White Hexagon -->
+      <polygon points="100,66 145,92 145,148 100,174 55,148 55,92" fill="#ffffff"/>
+      <!-- Official Typography inside Center Hexagon -->
+      <text x="100" y="125" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="44" fill="#030391" letter-spacing="-0.5">BK</text>
+      <text x="100" y="147" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="16.5" fill="#1488D8" letter-spacing="0.2">TP.HCM</text>
+    </svg>
+    <div class="hcmut-txt">
+      <small>ĐẠI HỌC QUỐC GIA THÀNH PHỐ HỒ CHÍ MINH</small>
+      <b>TRƯỜNG ĐẠI HỌC BÁCH KHOA</b>
+    </div>
+  </div>
+</div>
+<div><h1>Đèn Bàn Thông Minh</h1><p>Bảng điều khiển OLED 0.96" &amp; Wi-Fi ESP32</p></div>
+</div></div>
+<div class="th"><button data-th="a" class="on" title="Chàm">藍<br><small>Indigo</small></button><button data-th="n" title="Sóng đêm">波<br><small>Wave</small></button><button data-th="m" title="Bình minh">朝<br><small>Morning</small></button></div>
+<div class="st0">Chế độ Xem trước (Mô phỏng)</div></header>
+<div>
+<section class="c hero">
+  <div class="en">
+    <svg class="wavefill" id="wave" viewBox="0 0 280 190" preserveAspectRatio="none" aria-hidden="true">
+      <defs>
+        <!-- Subtle woodblock sky wash -->
+        <linearGradient id="skyWash" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="var(--w3)" stop-opacity="0.22"/>
+          <stop offset="60%" stop-color="var(--pn)" stop-opacity="0"/>
+        </linearGradient>
+        <!-- Deep Prussian blue wave body -->
+        <linearGradient id="waveBody" x1="0" y1="0" x2="0.25" y2="1">
+          <stop offset="0%" stop-color="var(--w2)"/>
+          <stop offset="55%" stop-color="var(--w1)"/>
+          <stop offset="100%" stop-color="var(--ink)"/>
+        </linearGradient>
+        <!-- Brighter ukiyo-e mid-tone indigo -->
+        <linearGradient id="waveMid" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="var(--w3)"/>
+          <stop offset="48%" stop-color="var(--w2)"/>
+          <stop offset="100%" stop-color="var(--w1)"/>
+        </linearGradient>
+        <!-- Deepest trough shadow -->
+        <linearGradient id="troughDark" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="var(--w1)"/>
+          <stop offset="100%" stop-color="var(--ink)"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Ukiyo-e Sky Wash -->
+      <rect width="280" height="190" fill="url(#skyWash)"/>
+
+      <!-- Dynamic Great Wave Group (Pure Kanagawa Wave — ultra-detailed ukiyo-e composition) -->
+      <g class="wave-scaler">
+        <!-- 1. Distant Horizon Rolling Swells -->
+        <path d="M-10,142 Q45,128 105,142 T220,136 T290,144 L290,195 L-10,195 Z" fill="var(--w3)" opacity="0.5"/>
+        <path d="M135,146 Q185,132 235,142 T292,135 L292,195 L135,195 Z" fill="var(--w2)" opacity="0.45"/>
+
+        <!-- 2. Secondary Left Rolling Wave (Behind the Great Wave) -->
+        <path d="M-12,195 L-12,114 C12,88 46,76 80,88 C62,96 52,116 64,134 L124,158 L-12,195 Z" fill="var(--w2)" stroke="var(--ink)" stroke-width="0.95"/>
+        <!-- Fine striations on secondary wave -->
+        <g fill="none" stroke="var(--ink)" stroke-linecap="round" opacity="0.65">
+          <path d="M-6,122 C18,100 44,92 68,96" stroke-width="1.2"/>
+          <path d="M0,132 C22,112 46,104 64,108" stroke-width="1.0"/>
+          <path d="M6,142 C26,124 46,116 60,119" stroke-width="0.9"/>
+        </g>
+
+        <!-- 3. Main Great Wave Outer Silhouette & Deep Curling Hollow -->
+        <path d="M-15,195 L-15,108 C14,50 70,10 142,12 C174,13 196,26 208,46 C184,36 150,42 130,64 C108,88 114,126 150,140 C192,156 240,140 295,118 L295,195 Z" fill="url(#waveBody)" stroke="var(--ink)" stroke-width="1.3" stroke-linejoin="round"/>
+
+        <!-- 4. Lighter Ukiyo-e Indigo Inner Swell & Banding -->
+        <path d="M-15,146 C20,88 70,30 138,22 C164,19 184,26 196,39 C170,33 138,44 118,68 C96,94 104,132 142,146 C182,160 236,148 295,128 L295,168 C234,178 168,176 114,158 C62,140 20,152 -15,176 Z" fill="url(#waveMid)" opacity="0.9"/>
+
+        <!-- 5. Detailed Hokusai Woodblock Ribbed Striations (Concentric & Sweeping Wave Lines) -->
+        <g fill="none" stroke="var(--ink)" stroke-linecap="round" opacity="0.78">
+          <path d="M4,120 C36,66 82,30 142,24" stroke-width="1.5"/>
+          <path d="M16,130 C46,80 88,44 146,35" stroke-width="1.3"/>
+          <path d="M28,139 C58,92 94,58 136,48" stroke-width="1.2"/>
+          <path d="M40,147 C68,104 100,72 130,62" stroke-width="1.05"/>
+          <path d="M-6,150 C32,114 70,88 112,80" stroke-width="1.4"/>
+          <path d="M10,158 C48,126 82,106 116,100" stroke-width="1.2"/>
+          <path d="M26,165 C62,138 92,122 122,118" stroke-width="1.0"/>
+          <!-- Right trough sweeping lines -->
+          <path d="M138,146 C184,162 236,152 290,134" stroke-width="1.3"/>
+          <path d="M150,155 C194,168 242,160 290,145" stroke-width="1.15"/>
+          <path d="M164,164 C206,174 248,168 290,156" stroke-width="1.0"/>
+        </g>
+
+        <!-- Luminous Pale-Blue / Foam Highlight Veins inside the Crest -->
+        <g fill="none" stroke="var(--foam)" stroke-linecap="round" opacity="0.72">
+          <path d="M42,72 C74,40 112,22 156,20" stroke-width="1.5"/>
+          <path d="M56,80 C86,52 118,35 152,31" stroke-width="1.15"/>
+          <path d="M72,88 C98,64 124,49 148,45" stroke-width="0.9"/>
+          <path d="M174,148 C212,154 250,146 286,132" stroke-width="1.1"/>
+        </g>
+
+        <!-- 6. Iconic Hokusai Sea-Foam Claws, Talons & Multi-Layered Spray -->
+        <g fill="var(--foam)" stroke="var(--ink)" stroke-width="0.95" stroke-linejoin="round">
+          <!-- Main Cresting Foam Mass with Intricate Finger-like Claws -->
+          <path d="M106,18 C134,7 170,10 198,30 C206,36 214,31 210,24 C219,30 225,41 216,47 C225,50 224,60 214,59 C220,66 213,75 204,70 C206,78 197,83 190,77 C189,85 179,85 176,76 C170,82 161,78 164,69 C155,71 149,64 154,56 C144,55 140,46 146,40 C131,36 116,39 104,48 C97,39 98,25 106,18 Z"/>
+          <!-- Fine inner claw & curl ink lines -->
+          <path d="M178,26 C191,31 201,39 206,48 M165,34 C178,41 186,51 190,61 M150,41 C161,48 167,57 169,66 M134,32 C145,35 154,41 160,48" fill="none" stroke="var(--ink)" stroke-width="0.85" stroke-linecap="round"/>
+
+          <!-- Secondary Left-Side Breaking Foam Crest -->
+          <path d="M44,52 C62,38 84,34 102,41 C95,46 96,53 103,55 C95,60 89,56 85,62 C79,63 75,58 70,62 C63,60 62,53 55,56 C49,56 46,54 44,52 Z"/>
+          <path d="M68,45 C78,46 86,49 91,54" fill="none" stroke="var(--ink)" stroke-width="0.75" stroke-linecap="round"/>
+
+          <!-- Mid-Wave Breaking Foam Ridge -->
+          <path d="M12,86 C26,74 44,70 58,75 C53,79 54,84 59,86 C53,89 48,87 45,91 C40,91 37,87 33,90 C28,89 27,84 22,86 C17,86 14,87 12,86 Z"/>
+
+          <!-- Scattered Hokusai Sea-Spray Droplets -->
+          <circle cx="222" cy="20" r="2.2"/>
+          <circle cx="232" cy="33" r="2.6"/>
+          <circle cx="240" cy="46" r="1.9"/>
+          <circle cx="230" cy="57" r="2.3"/>
+          <circle cx="221" cy="70" r="1.7"/>
+          <circle cx="209" cy="14" r="1.6"/>
+          <circle cx="196" cy="10" r="1.8"/>
+          <circle cx="244" cy="28" r="1.5"/>
+          <circle cx="238" cy="66" r="1.4"/>
+          <circle cx="110" cy="55" r="1.7"/>
+          <circle cx="121" cy="64" r="1.4"/>
+          <circle cx="132" cy="72" r="1.2"/>
+          <circle cx="106" cy="36" r="1.4"/>
+        </g>
+
+        <!-- 7. Foreground Curling Wave (Bottom Left) -->
+        <path d="M-15,195 L-15,152 C16,128 52,120 86,134 C68,142 64,160 82,170 C116,188 186,172 295,156 L295,195 Z" fill="url(#troughDark)" stroke="var(--ink)" stroke-width="1.2"/>
+        <g fill="none" stroke="var(--w3)" stroke-linecap="round" opacity="0.65">
+          <path d="M-6,162 C24,142 52,136 76,141" stroke-width="1.2"/>
+          <path d="M6,172 C34,154 60,150 80,155" stroke-width="1.05"/>
+          <path d="M18,181 C46,166 72,163 92,167" stroke-width="0.9"/>
+        </g>
+        <!-- Foreground Foam Claws & Spray -->
+        <g fill="var(--foam)" stroke="var(--ink)" stroke-width="0.9" stroke-linejoin="round">
+          <path d="M60,128 C78,122 96,128 105,140 C98,143 94,140 91,146 C84,148 80,142 76,148 C69,147 67,140 61,142 C57,138 57,132 60,128 Z"/>
+          <circle cx="111" cy="133" r="1.6"/>
+          <circle cx="116" cy="143" r="1.4"/>
+          <circle cx="107" cy="150" r="1.2"/>
+        </g>
+
+        <!-- 8. Foreground Right Swell (Balancing the composition) -->
+        <path d="M168,195 C196,178 232,168 295,164 L295,195 Z" fill="var(--w2)" stroke="var(--ink)" stroke-width="1.0"/>
+        <path d="M188,188 C218,177 252,172 290,171" fill="none" stroke="var(--foam)" stroke-width="1.1" stroke-linecap="round" opacity="0.7"/>
+      </g>
+    </svg>
+    <b id="pct">58%</b>
+  </div>
+  <h2>Đèn LED PWM (GPIO 23)</h2>
+  <span class="sub">Tự động bù sáng theo môi trường</span>
+  <span id="pwm">PWM: 147/255</span>
+</section>
+<section class="c"><h2>Mô phỏng OLED 0.96" (128×64)</h2><span class="sub">SSD1306 I2C</span>
+<div class="oled" id="oled"><div class="hd" id="oh"></div><div id="oc"></div><hr><div class="ft"><div><div id="om">Mode: AUTO</div><div id="op">Nguoi: CO (45cm)</div></div><div id="ol">Lux:220</div></div></div>
+<span class="cap">GND · VCC · SCL(22) · SDA(21)</span></section>
+<section class="c"><h2>Giả lập cảm biến thử nghiệm</h2><span class="sub">Chế độ đèn (Nút D17 / Chạm Pad 0)</span>
+<div class="seg"><button data-m="AUTO" class="on"><b>AUTO</b><small>自動</small></button><button data-m="ON"><b>ON</b><small>点灯</small></button><button data-m="OFF"><b>OFF</b><small>消灯</small></button></div>
+<label class="rg"><span>Ánh sáng môi trường (BH1750)<b id="lv">220 lx</b></span><input type="range" id="lux" min="0" max="520" value="220"></label>
+<label class="rg"><span>Khoảng cách người (HC-SR04)<b id="dv">45 cm</b></span><input type="range" id="dst" min="5" max="200" value="45"></label></section>
+</div>
+<div>
+<section class="c"><h2><span class="nb">一</span>Bố cục hiển thị màn hình OLED</h2><span class="sub">Dòng trên cùng (Header)</span>
+<select id="hdr"><option value="d">Ngày / Tháng / Năm (Đồng bộ giờ NTP)</option><option value="n">Tên thiết bị</option></select>
+<label class="t"><span>Hiển thị đồng hồ lớn<small>Định dạng Giờ : Phút : Giây (cỡ chữ lớn)</small></span><input type="checkbox" data-t="clk" checked></label>
+<label class="t"><span>Hiển thị Mode &amp; Độ sáng (Lux)<small>Trạng thái AUTO/ON/OFF và cường độ sáng BH1750</small></span><input type="checkbox" data-t="mod" checked></label>
+<label class="t"><span>Hiển thị trạng thái người &amp; Khoảng cách<small>Thông báo CÓ / KHÔNG từ HC-SR04</small></span><input type="checkbox" data-t="per" checked></label></section>
+<section class="c"><h2><span class="nb">二</span>Hiển thị vật lý &amp; ngưỡng cảm biến</h2>
+<label class="t"><span>Lật ngược màn hình 180°<small>Khi gắn ngược module OLED</small></span><input type="checkbox" data-t="flip"></label></section>
+<section class="c"><h2><span class="nb">三</span>Kết nối Wi-Fi</h2>
+<div class="st"><span>Tình trạng kết nối</span><b>Chế độ mô phỏng (Chưa nối mạch)</b><span>Mạng Wi-Fi đã lưu</span><b>Anh Bảnh</b><span>Địa chỉ truy cập</span><code>http://denban.local (hoặc 192.168.4.1)</code></div>
+<button class="btn" id="scan"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12a9 9 0 1 1-3-6.7M21 4v5h-5"/></svg>Quét lại mạng Wi-Fi 2.4GHz</button>
+<ul id="nets"></ul>
+<div class="f"><input id="ssid" placeholder="Tên Wi-Fi (SSID - Chỉ hỗ trợ băng tần 2.4GHz)"><input type="password" placeholder="Mật khẩu Wi-Fi"></div>
+<button class="btn pri" id="save">Lưu cấu hình Wi-Fi</button></section>
+</div>
+<div class="sg"></div></main>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];let mode='AUTO';
+const N=[["Anh Bảnh",1,-48],["VNPT_2.4G_PhongHoc",1,-61],["FPT_Telecom_24GHz",1,-72],["SmartHome_IoT_2G",1,-78],["Guest_Free_WiFi",0,-84]];
+const lk='<svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
+$('#nets').innerHTML=N.map(([n,l,r])=>{const q=r>-55?4:r>-67?3:r>-75?2:1,c=r>-65?'g':r>-75?'a':'d';return`<li data-s="${n}"><span class="b ${c}">${[1,2,3,4].map(i=>`<i${i<=q?' class="on"':''}></i>`).join('')}</span><em>${n}</em>${l?lk:'<u>Mở</u>'}<s class="${c}">${r} dBm</s></li>`}).join('');
+$$('#nets li').forEach(li=>li.onclick=()=>{$('#ssid').value=li.dataset.s;$$('#nets li').forEach(x=>x.classList.toggle('sel',x===li))});
+function up(){
+  const l=+$('#lux').value,d=+$('#dst').value,p=d<=100,w=mode=='ON'?255:mode=='OFF'?0:p?Math.round(255*(1-l/520)):0;
+  $('#pct').textContent=Math.round(w/2.55)+'%';
+  $('#pwm').textContent='PWM: '+w+'/255';
+  $('#lv').textContent=l+' lx';
+  $('#dv').textContent=d+' cm';
+  $('#om').textContent='Mode: '+mode;
+  $('#ol').textContent='Lux:'+l;
+  $('#op').textContent='Nguoi: '+(p?'CO ('+d+'cm)':'KHONG');
+  document.documentElement.style.setProperty('--p',w/255);
+}
+$$('[data-m]').forEach(b=>b.onclick=()=>{mode=b.dataset.m;$$('[data-m]').forEach(x=>x.classList.toggle('on',x===b));up()});
+$('#lux').oninput=$('#dst').oninput=up;
+$$('[data-t]').forEach(c=>c.onchange=()=>{const t=c.dataset.t,v=c.checked?'visible':'hidden';
+if(t=='clk')$('#oc').style.visibility=v;if(t=='mod'){$('#om').style.visibility=v;$('#ol').style.visibility=v}if(t=='per')$('#op').style.visibility=v;
+if(t=='flip')$('#oled').style.transform=c.checked?'rotate(180deg)':''});
+function tick(){const d=new Date(),z=n=>String(n).padStart(2,0);$('#oc').textContent=z(d.getHours())+':'+z(d.getMinutes())+':'+z(d.getSeconds());
+$('#oh').textContent=$('#hdr').value=='d'?z(d.getDate())+'/'+z(d.getMonth()+1)+'/'+d.getFullYear():'DEN BAN THONG MINH'}
+$('#hdr').onchange=tick;
+$('#scan').onclick=e=>{const b=e.currentTarget;b.classList.add('spin');setTimeout(()=>b.classList.remove('spin'),1200)};
+$('#save').onclick=e=>{const b=e.currentTarget,t=b.textContent;b.textContent='Đã lưu (xem trước)';setTimeout(()=>b.textContent=t,1500)};
+function th(v){document.body.dataset.th=v;$$('.th button').forEach(x=>x.classList.toggle('on',x.dataset.th==v));try{localStorage.setItem('th3',v)}catch(e){}}
+$$('.th button').forEach(b=>b.onclick=()=>th(b.dataset.th));
+let s0='a';try{s0=localStorage.getItem('th3')||'a'}catch(e){}th(['a','n','m'].includes(s0)?s0:'a');
+setInterval(tick,1000);tick();up();
+</script></body></html>
